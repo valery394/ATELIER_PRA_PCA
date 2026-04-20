@@ -181,6 +181,8 @@ Nous allons dans ce scénario **détruire notre PVC pra-data**. C'est à dire no
 **Destruction du PVC pra-data :** Ci-dessous, la cible de notre scénario   
   
 ![Screenshot Actions](scenario2.png)  
+<img width="429" height="140" alt="image" src="https://github.com/user-attachments/assets/61ee70f0-faca-49bb-a241-958854b41622" />
+
 
 🔥 **PHASE 1 — Simuler le sinistre (perte de la BDD de production)**  
 Copier/coller le code suivant dans votre terminal Codespace pour détruire votre base de données :
@@ -232,28 +234,34 @@ Faites preuve de pédagogie et soyez clair dans vos explications et procedures d
 
 **Exercice 1 :**  
 Quels sont les composants dont la perte entraîne une perte de données ?  
-  
-*..Répondez à cet exercice ici..*
+  Le PVC pra-data c’est lui qui contient la base SQLite en production.
+  Les sauvegardes dans le PVC pra-backup, Si ce PVC est perdu, on perd aussi la capacité de restaurer la base.
 
 **Exercice 2 :**  
 Expliquez nous pourquoi nous n'avons pas perdu les données lors de la supression du PVC pra-data  
   
-*..Répondez à cet exercice ici..*
+La base SQLite n’est pas stockée dans le pod, mais dans le PVC pra-data
 
 **Exercice 3 :**  
 Quels sont les RTO et RPO de cette solution ?  
   
-*..Répondez à cet exercice ici..*
+RTO Recovery Time Objective : c'est le temps nécessaire pour rétablir le service après un incident
+RPO (Recovery Point Objective) Perte de données maximale acceptable, la perte de donné entre 2 sauvegardes
 
 **Exercice 4 :**  
 Pourquoi cette solution (cet atelier) ne peux pas être utilisé dans un vrai environnement de production ? Que manque-t-il ?   
   
-*..Répondez à cet exercice ici..*
-  
+SQLite n’est pas un moteur de base de données pour la production : Pas de concurrence, pas de réplication, pas de haute disponibilité.
+Pas d’outil de restauration automatisé Le PRA nécessite une intervention manuelle.
+
 **Exercice 5 :**  
 Proposez une archtecture plus robuste.   
   
-*..Répondez à cet exercice ici..*
+  Base de données robuste
+PostgreSQL ou MySQL en cluster HA
+Réplication synchrone
+Sauvegardes automatiques + PITR (Point‑In‑Time Recovery)
+Stockage distribué
 
 ---------------------------------------------------
 Séquence 6 : Ateliers  
