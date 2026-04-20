@@ -148,6 +148,7 @@ Nous allons dans ce scénario **détruire notre Pod Kubernetes**. Ceci simulera 
 <img width="451" height="326" alt="image" src="https://github.com/user-attachments/assets/66929554-c7e8-491d-a33f-ad4e755a0f29" />
 
 
+
 Nous perdons donc ici notre application mais pas notre base de données puisque celle-ci est déposée dans le PVC pra-data hors du pod.  
 
 Copier/coller le code suivant dans votre terminal Codespace pour détruire votre pod :
@@ -234,23 +235,42 @@ Faites preuve de pédagogie et soyez clair dans vos explications et procedures d
 
 **Exercice 1 :**  
 Quels sont les composants dont la perte entraîne une perte de données ?  
+<<<<<<< HEAD
   Le PVC pra-data c’est lui qui contient la base SQLite en production.
   Les sauvegardes dans le PVC pra-backup, Si ce PVC est perdu, on perd aussi la capacité de restaurer la base.
+=======
+  
+*Le PVC pra-data puisque c'est lui qui contient la base SQLite en production.*
+
+Les sauvegardes dans le PVC pra-backup se perd, on perd aussi la capacité de restaurer la base.
+>>>>>>> 2585232 (Ajout du dossier README.md)
 
 **Exercice 2 :**  
 Expliquez nous pourquoi nous n'avons pas perdu les données lors de la supression du PVC pra-data  
   
+<<<<<<< HEAD
 La base SQLite n’est pas stockée dans le pod, mais dans le PVC pra-data
+=======
+*.La base SQLite n’est pas stockée dans le pod, mais dans le PVC pra-data.
+Lorsqu’un pod est supprimé, Kubernetes en recrée automatiquement un nouveau (PCA).*
+>>>>>>> 2585232 (Ajout du dossier README.md)
 
 **Exercice 3 :**  
 Quels sont les RTO et RPO de cette solution ?  
   
+<<<<<<< HEAD
 RTO Recovery Time Objective : c'est le temps nécessaire pour rétablir le service après un incident
 RPO (Recovery Point Objective) Perte de données maximale acceptable, la perte de donné entre 2 sauvegardes
+=======
+*RTO Recovery Time Objective le temps que nous avons pour rétablir un service supprimé
+
+RPO Recovery Point Objective capacité total de perte de donné*
+>>>>>>> 2585232 (Ajout du dossier README.md)
 
 **Exercice 4 :**  
 Pourquoi cette solution (cet atelier) ne peux pas être utilisé dans un vrai environnement de production ? Que manque-t-il ?   
   
+<<<<<<< HEAD
 SQLite n’est pas un moteur de base de données pour la production : Pas de concurrence, pas de réplication, pas de haute disponibilité.
 Pas d’outil de restauration automatisé Le PRA nécessite une intervention manuelle.
 
@@ -262,6 +282,21 @@ PostgreSQL ou MySQL en cluster HA
 Réplication synchrone
 Sauvegardes automatiques + PITR (Point‑In‑Time Recovery)
 Stockage distribué
+=======
+*Pas d’outil de restauration automatisé  
+Le PRA nécessite une intervention manuelle.
+Impossible de détecter un incident en temps réel.*
+  
+**Exercice 5 :**  
+Proposez une archtecture plus robuste.   
+  
+*1. Base de données robuste
+PostgreSQL ou MySQL en cluster HA
+Réplication synchrone
+Sauvegardes automatiques + PITR
+Stockage distribué
+PRA automatisé*
+>>>>>>> 2585232 (Ajout du dossier README.md)
 
 ---------------------------------------------------
 Séquence 6 : Ateliers  
